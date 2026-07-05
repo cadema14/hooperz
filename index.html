@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooperz — Maglie da Basket Streetwear</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-ball">🏀</span>
+        <span class="logo-name">hooper<span class="accent">z</span></span>
+      </div>
+      <nav class="nav">
+        <a href="#prodotti">Prodotti</a>
+        <a href="#chi-siamo">Chi siamo</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn">
+        🛍️ <span id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Stile da campo,<br><span class="accent">ogni giorno</span></h1>
+      <p>Maglie streetwear per chi vive la pallacanestro</p>
+      <a href="#prodotti" class="btn-primary">Scopri le maglie</a>
+    </div>
+  </section>
+
+  <!-- FILTRI -->
+  <section class="filters-section" id="prodotti">
+    <div class="container">
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all">Tutte</button>
+        <button class="filter" data-filter="oversized">Oversized</button>
+        <button class="filter" data-filter="classic">Classic</button>
+        <button class="filter" data-filter="retro">Retro</button>
+        <button class="filter" data-filter="minimal">Minimal</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODOTTI -->
+  <section class="products-section">
+    <div class="container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="chi-siamo">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-ball">🏀</span>
+        <span class="logo-name">hooper<span class="accent">z</span></span>
+      </div>
+      <p>Maglie streetwear per cestisti. Spedizione in tutta Italia.</p>
+    </div>
+  </footer>
+
+  <!-- CARRELLO -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Il tuo carrello</h2>
+      <button id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Il carrello è vuoto</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">Totale: <strong id="cartTotal">€0</strong></div>
+      <button class="btn-primary" style="width:100%">Vai al checkout</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
