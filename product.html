@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooperz — Prodotto</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-ball">🏀</span>
+        <span class="logo-name">hooper<span class="accent">z</span></span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">← Torna al negozio</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn">
+        🛍️ <span id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PRODOTTO -->
+  <section class="product-detail">
+    <div class="container">
+      <div class="product-layout">
+
+        <!-- FOTO -->
+        <div class="product-images">
+          <div class="product-main-img">
+            <img id="mainImg" src="" alt="">
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="product-info">
+          <div class="product-tag" id="productTag"></div>
+          <h1 class="product-name" id="productName"></h1>
+          <div class="product-price" id="productPrice"></div>
+
+          <div class="product-section">
+            <div class="section-label">Colore: <span id="colorLabel"></span></div>
+            <div class="swatches" id="swatches"></div>
+          </div>
+
+          <div class="product-section">
+            <div class="section-label">Taglia</div>
+            <div class="sizes" id="sizes"></div>
+          </div>
+
+          <div class="product-section">
+            <div class="section-label">Descrizione</div>
+            <p class="product-desc" id="productDesc"></p>
+          </div>
+
+          <button class="btn-primary btn-large" id="addToCartBtn">
+            + Aggiungi al carrello
+          </button>
+
+          <div class="product-meta">
+            <span>🚚 Spedizione gratuita sopra €60</span>
+            <span>📦 Consegna in 5-7 giorni</span>
+            <span>↩️ Reso gratuito entro 30 giorni</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRELLO -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Il tuo carrello</h2>
+      <button id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Il carrello è vuoto</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">Totale: <strong id="cartTotal">€0</strong></div>
+      <button class="btn-primary" style="width:100%">Vai al checkout</button>
+    </div>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>
