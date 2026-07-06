@@ -450,3 +450,24 @@ body {
   color: #555;
   margin-top: 12px;
 }
+/* SPEDIZIONE */
+.freeshipping-banner {
+  font-size: 13px;
+  margin: 12px 0;
+}
+.shipping-options {
+  margin-bottom: 1rem;
+}
+.shipping-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #f0f0f0;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+.shipping-select:focus { border-color: #E8521A; }

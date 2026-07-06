@@ -26,7 +26,34 @@ cardElement.on('change', e => {
 // LEGGI CARRELLO
 // =====================
 const cart = JSON.parse(localStorage.getItem('hooperz_cart') || '[]');
-const SHIPPING = 5.90;
+let shippingCost = 5.90;
+let shippingType = 'standard';
+
+function getShippingCost(subtotal, type) {
+  if (type === 'express') return 12.90;
+  if (subtotal >= 60) return 0;
+  return 5.90;
+}
+
+function updateTotals() {
+  const subtotal = cart.reduce((s, i) => s + i.price, 0);
+  shippingCost = getShippingCost(subtotal, shippingType);
+  const total = subtotal + shippingCost;
+
+  document.getElementById('subtotal').textContent = '€' + subtotal.toFixed(2);
+  document.getElementById('shippingCost').textContent = shippingCost === 0 ? '🎉 Gratuita' : '€' + shippingCost.toFixed(2);
+  document.getElementById('total').textContent = '€' + total.toFixed(2);
+
+  const banner = document.getElementById('freeshippingBanner');
+  if (subtotal >= 60) {
+    banner.textContent = '🎉 Hai la spedizione gratuita!';
+    banner.style.color = '#4CAF50';
+  } else {
+    const diff = (60 - subtotal).toFixed(2);
+    banner.textContent = `Aggiungi €${diff} per la spedizione gratuita`;
+    banner.style.color = '#888';
+  }
+}
 
 function renderOrder() {
   const itemsEl = document.getElementById('orderItems');
@@ -44,12 +71,13 @@ function renderOrder() {
       <div class="order-item-price">€${item.price}</div>
     </div>
   `).join('');
-
-  const subtotal = cart.reduce((s, i) => s + i.price, 0);
-  const total = subtotal + SHIPPING;
-  document.getElementById('subtotal').textContent = '€' + subtotal.toFixed(2);
-  document.getElementById('total').textContent = '€' + total.toFixed(2);
 }
+
+// Cambia tipo spedizione
+document.getElementById('shippingOptions').addEventListener('change', e => {
+  shippingType = e.target.value;
+  updateTotals();
+});
 
 // =====================
 // PAGAMENTO
@@ -89,3 +117,4 @@ document.getElementById('payBtn').addEventListener('click', async () => {
 });
 
 renderOrder();
+updateTotals();

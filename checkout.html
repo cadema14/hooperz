@@ -33,6 +33,17 @@
         <div class="order-summary">
           <h2 class="checkout-title">Riepilogo ordine</h2>
           <div id="orderItems"></div>
+
+          <p id="freeshippingBanner" class="freeshipping-banner"></p>
+
+          <h2 class="checkout-title" style="margin-top:1.5rem">Spedizione</h2>
+          <div class="shipping-options">
+            <select id="shippingOptions" class="shipping-select">
+              <option value="standard">Standard (5-7 giorni) — €5.90</option>
+              <option value="express">Express (1-2 giorni) — €12.90</option>
+            </select>
+          </div>
+
           <div class="order-totals">
             <div class="order-row">
               <span>Subtotale</span>
@@ -40,7 +51,7 @@
             </div>
             <div class="order-row">
               <span>Spedizione</span>
-              <span id="shipping">€5.90</span>
+              <span id="shippingCost">€5.90</span>
             </div>
             <div class="order-row order-total">
               <span>Totale</span>
