@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooperz — Ordine Confermato</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-ball">🏀</span>
+        <span class="logo-name">hooper<span class="accent">z</span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONFERMA -->
+  <section class="confirmation-section">
+    <div class="container">
+      <div class="confirmation-box">
+        <div class="confirmation-icon">✅</div>
+        <h1 class="confirmation-title">Ordine confermato!</h1>
+        <p class="confirmation-subtitle">Grazie per il tuo acquisto su Hooperz 🏀</p>
+
+        <div class="confirmation-details">
+          <div class="confirmation-row">
+            <span>Numero ordine</span>
+            <span id="orderNumber"></span>
+          </div>
+          <div class="confirmation-row">
+            <span>Email di conferma</span>
+            <span id="orderEmail"></span>
+          </div>
+          <div class="confirmation-row">
+            <span>Spedizione stimata</span>
+            <span id="orderShipping"></span>
+          </div>
+          <div class="confirmation-row confirmation-total">
+            <span>Totale pagato</span>
+            <span id="orderTotal"></span>
+          </div>
+        </div>
+
+        <div class="confirmation-items">
+          <h2>Articoli ordinati</h2>
+          <div id="confirmationItems"></div>
+        </div>
+
+        <a href="index.html" class="btn-primary" style="display:inline-block;margin-top:2rem">
+          Continua lo shopping
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/products.js"></script>
+  <script src="js/confirmation.js"></script>
+</body>
+</html>

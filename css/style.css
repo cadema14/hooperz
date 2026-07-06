@@ -509,3 +509,59 @@ body {
   color: #666;
   font-size: 16px;
 }
+/* PAGINA CONFERMA */
+.confirmation-section {
+  padding: 4rem 0;
+}
+.confirmation-box {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.confirmation-icon {
+  font-size: 64px;
+  margin-bottom: 1rem;
+}
+.confirmation-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.confirmation-subtitle {
+  color: #888;
+  font-size: 16px;
+  margin-bottom: 2rem;
+}
+.confirmation-details {
+  background: #1a1a1a;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.confirmation-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #888;
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+}
+.confirmation-row:last-child {
+  border-bottom: none;
+}
+.confirmation-total {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f0f0f0;
+  margin-top: 4px;
+}
+.confirmation-items {
+  text-align: left;
+}
+.confirmation-items h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

@@ -111,9 +111,16 @@ document.getElementById('payBtn').addEventListener('click', async () => {
     return;
   }
 
-  alert('✅ Ordine confermato! (modalità test)\nPayment Method ID: ' + paymentMethod.id);
+  const subtotal = cart.reduce((s, i) => s + i.price, 0);
+  const total = subtotal + shippingCost;
+  localStorage.setItem('hooperz_last_order', JSON.stringify({
+    email: email,
+    total: total,
+    shippingType: shippingType,
+    cart: cart
+  }));
   localStorage.removeItem('hooperz_cart');
-  window.location.href = 'index.html';
+  window.location.href = 'confirmation.html';
 });
 
 renderOrder();
