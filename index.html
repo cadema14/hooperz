@@ -36,9 +36,14 @@
     </div>
   </section>
 
-  <!-- FILTRI -->
+  <!-- FILTRI E RICERCA -->
   <section class="filters-section" id="prodotti">
     <div class="container">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Cerca una maglia...">
+        <button class="search-clear" id="searchClear">✕</button>
+      </div>
       <div class="filters" id="filters">
         <button class="filter active" data-filter="all">Tutte</button>
         <button class="filter" data-filter="oversized">Oversized</button>
@@ -52,6 +57,9 @@
   <!-- PRODOTTI -->
   <section class="products-section">
     <div class="container">
+      <div id="noResults" class="no-results" style="display:none">
+        😕 Nessuna maglia trovata per "<span id="searchTerm"></span>"
+      </div>
       <div class="grid" id="grid"></div>
     </div>
   </section>

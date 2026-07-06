@@ -3,6 +3,8 @@
 // =====================
 let selected = {};
 let cart = [];
+let currentFilter = 'all';
+let currentSearch = '';
 
 products.forEach(p => {
   selected[p.id] = { colorIdx: 0, sizeIdx: -1 };
@@ -11,11 +13,31 @@ products.forEach(p => {
 // =====================
 // RENDER PRODOTTI
 // =====================
-function renderProducts(filter) {
+function renderProducts(filter, search) {
   const grid = document.getElementById('grid');
-  const list = filter === 'all'
+  const noResults = document.getElementById('noResults');
+  const searchTerm = document.getElementById('searchTerm');
+
+  let list = filter === 'all'
     ? products
     : products.filter(p => p.style === filter);
+
+  if (search && search.trim() !== '') {
+    const q = search.toLowerCase();
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.style.toLowerCase().includes(q)
+    );
+  }
+
+  if (list.length === 0) {
+    grid.innerHTML = '';
+    noResults.style.display = 'block';
+    searchTerm.textContent = search;
+    return;
+  }
+
+  noResults.style.display = 'none';
 
   grid.innerHTML = list.map(p => {
     const sel = selected[p.id];
@@ -57,16 +79,33 @@ function renderProducts(filter) {
 }
 
 // =====================
+// RICERCA
+// =====================
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  const clearBtn = document.getElementById('searchClear');
+  clearBtn.style.display = currentSearch ? 'block' : 'none';
+  renderProducts(currentFilter, currentSearch);
+});
+
+document.getElementById('searchClear').addEventListener('click', () => {
+  document.getElementById('searchInput').value = '';
+  currentSearch = '';
+  document.getElementById('searchClear').style.display = 'none';
+  renderProducts(currentFilter, currentSearch);
+});
+
+// =====================
 // SELEZIONE COLORE / TAGLIA
 // =====================
 function selectColor(id, idx) {
   selected[id].colorIdx = idx;
-  renderProducts(currentFilter);
+  renderProducts(currentFilter, currentSearch);
 }
 
 function selectSize(id, idx) {
   selected[id].sizeIdx = idx;
-  renderProducts(currentFilter);
+  renderProducts(currentFilter, currentSearch);
 }
 
 // =====================
@@ -145,14 +184,12 @@ function goToCheckout() {
 // =====================
 // FILTRI
 // =====================
-let currentFilter = 'all';
-
 document.getElementById('filters').addEventListener('click', e => {
   if (!e.target.matches('.filter')) return;
   document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   currentFilter = e.target.dataset.filter;
-  renderProducts(currentFilter);
+  renderProducts(currentFilter, currentSearch);
 });
 
 // =====================
@@ -165,4 +202,4 @@ document.getElementById('cartOverlay').addEventListener('click', closeCart);
 // =====================
 // AVVIO
 // =====================
-renderProducts('all');
+renderProducts('all', '');
