@@ -135,6 +135,14 @@ function closeCart() {
 }
 
 // =====================
+// CHECKOUT
+// =====================
+function goToCheckout() {
+  localStorage.setItem('hooperz_cart', JSON.stringify(cart));
+  window.location.href = 'checkout.html';
+}
+
+// =====================
 // FILTRI
 // =====================
 let currentFilter = 'all';

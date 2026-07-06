@@ -111,6 +111,14 @@ function closeCart() {
   document.getElementById('cartOverlay').classList.remove('open');
 }
 
+// =====================
+// CHECKOUT
+// =====================
+function goToCheckout() {
+  localStorage.setItem('hooperz_cart', JSON.stringify(cart));
+  window.location.href = 'checkout.html';
+}
+
 document.getElementById('cartBtn').addEventListener('click', openCart);
 document.getElementById('closeCart').addEventListener('click', closeCart);
 document.getElementById('cartOverlay').addEventListener('click', closeCart);

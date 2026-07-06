@@ -1,0 +1,91 @@
+// =====================
+// STRIPE
+// =====================
+const stripe = Stripe('pk_test_51TqCLmRyCOKqf9lEujC9H4aT4WVVaVhanP60kyRCqGWhXKfO5k66zREKuCxbplXEyLBUngMl6JmfF1xhPPTJSnV400sSO7LJdh');
+const elements = stripe.elements();
+
+const cardElement = elements.create('card', {
+  style: {
+    base: {
+      color: '#f0f0f0',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '16px',
+      '::placeholder': { color: '#555' }
+    },
+    invalid: { color: '#E8521A' }
+  }
+});
+cardElement.mount('#card-element');
+
+cardElement.on('change', e => {
+  const el = document.getElementById('card-errors');
+  el.textContent = e.error ? e.error.message : '';
+});
+
+// =====================
+// LEGGI CARRELLO
+// =====================
+const cart = JSON.parse(localStorage.getItem('hooperz_cart') || '[]');
+const SHIPPING = 5.90;
+
+function renderOrder() {
+  const itemsEl = document.getElementById('orderItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<p style="color:#666;font-size:14px">Carrello vuoto — <a href="index.html" style="color:#E8521A">torna al negozio</a></p>';
+    return;
+  }
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="order-item">
+      <img src="${item.image}" alt="${item.name}">
+      <div class="order-item-info">
+        <div class="order-item-name">${item.name}</div>
+        <div class="order-item-detail">${item.color} · Taglia ${item.size}</div>
+      </div>
+      <div class="order-item-price">€${item.price}</div>
+    </div>
+  `).join('');
+
+  const subtotal = cart.reduce((s, i) => s + i.price, 0);
+  const total = subtotal + SHIPPING;
+  document.getElementById('subtotal').textContent = '€' + subtotal.toFixed(2);
+  document.getElementById('total').textContent = '€' + total.toFixed(2);
+}
+
+// =====================
+// PAGAMENTO
+// =====================
+document.getElementById('payBtn').addEventListener('click', async () => {
+  const name = document.getElementById('fullName').value;
+  const email = document.getElementById('email').value;
+  const address = document.getElementById('address').value;
+  const city = document.getElementById('city').value;
+  const zip = document.getElementById('zip').value;
+
+  if (!name || !email || !address || !city || !zip) {
+    alert('Compila tutti i campi!');
+    return;
+  }
+
+  const btn = document.getElementById('payBtn');
+  btn.textContent = 'Elaborazione...';
+  btn.disabled = true;
+
+  const { paymentMethod, error } = await stripe.createPaymentMethod({
+    type: 'card',
+    card: cardElement,
+    billing_details: { name, email }
+  });
+
+  if (error) {
+    document.getElementById('card-errors').textContent = error.message;
+    btn.textContent = 'Paga ora';
+    btn.disabled = false;
+    return;
+  }
+
+  alert('✅ Ordine confermato! (modalità test)\nPayment Method ID: ' + paymentMethod.id);
+  localStorage.removeItem('hooperz_cart');
+  window.location.href = 'index.html';
+});
+
+renderOrder();
