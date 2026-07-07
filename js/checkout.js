@@ -1,4 +1,9 @@
 // =====================
+// EMAILJS
+// =====================
+emailjs.init('JfWyfR68eWerAaDhX');
+
+// =====================
 // STRIPE
 // =====================
 const stripe = Stripe('pk_test_51TqCLmRyCOKqf9lEujC9H4aT4WVVaVhanP60kyRCqGWhXKfO5k66zREKuCxbplXEyLBUngMl6JmfF1xhPPTJSnV400sSO7LJdh');
@@ -111,13 +116,33 @@ document.getElementById('payBtn').addEventListener('click', async () => {
     return;
   }
 
+  // Calcola totale
   const subtotal = cart.reduce((s, i) => s + i.price, 0);
   const total = subtotal + shippingCost;
+  const orderNumber = '#HZ' + Math.floor(Math.random() * 90000 + 10000);
+  const orderItems = cart.map(i => `${i.name} (${i.color}, ${i.size})`).join(', ');
+
+  // Invia email con EmailJS
+  try {
+    await emailjs.send('service_3wkvkzj' , 'template_gmbmcxe', {
+      to_name: name,
+      to_email: email,
+      order_number: orderNumber,
+      order_items: orderItems,
+      shipping_type: shippingType === 'express' ? 'Express (1-2 giorni)' : 'Standard (5-7 giorni)',
+      order_total: '€' + total.toFixed(2)
+    });
+  } catch(e) {
+    console.log('Errore email:', e);
+  }
+
+  // Salva ordine e vai alla conferma
   localStorage.setItem('hooperz_last_order', JSON.stringify({
     email: email,
     total: total,
     shippingType: shippingType,
-    cart: cart
+    cart: cart,
+    orderNumber: orderNumber
   }));
   localStorage.removeItem('hooperz_cart');
   window.location.href = 'confirmation.html';
