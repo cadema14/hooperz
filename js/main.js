@@ -17,6 +17,7 @@ function renderProducts(filter, search) {
   const grid = document.getElementById('grid');
   const noResults = document.getElementById('noResults');
   const searchTerm = document.getElementById('searchTerm');
+  const noResultsText = document.getElementById('noResultsText');
 
   let list = filter === 'all'
     ? products
@@ -33,6 +34,7 @@ function renderProducts(filter, search) {
   if (list.length === 0) {
     grid.innerHTML = '';
     noResults.style.display = 'block';
+    noResultsText.textContent = t('no_results');
     searchTerm.textContent = search;
     return;
   }
@@ -47,7 +49,7 @@ function renderProducts(filter, search) {
           <img src="${p.image}" alt="${p.name}" onerror="this.src=''">
         </div>
         <div class="card-body">
-          <div class="card-tag">${p.style}${p.isNew ? ' · <span style="color:#E8521A">Nuovo</span>' : ''}</div>
+          <div class="card-tag">${p.style}${p.isNew ? ` · <span style="color:#E8521A">${t('new')}</span>` : ''}</div>
           <div class="card-name">${p.name}</div>
           <div class="swatches">
             ${p.colors.map((c, i) => `
@@ -69,7 +71,7 @@ function renderProducts(filter, search) {
           <div class="card-footer">
             <span class="price">€${p.price}</span>
             <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${p.id})">
-              + Aggiungi
+              ${t('add_to_cart')}
             </button>
           </div>
         </div>
@@ -116,7 +118,7 @@ function addToCart(id) {
   const sel = selected[id];
 
   if (sel.sizeIdx === -1) {
-    alert('Seleziona una taglia prima di aggiungere al carrello!');
+    alert(t('select_size'));
     return;
   }
 
@@ -142,7 +144,7 @@ function updateCartUI() {
   count.textContent = cart.length;
 
   if (cart.length === 0) {
-    items.innerHTML = '<p class="cart-empty">Il carrello è vuoto</p>';
+    items.innerHTML = `<p class="cart-empty">${t('cart_empty')}</p>`;
     footer.style.display = 'none';
     return;
   }
@@ -152,7 +154,7 @@ function updateCartUI() {
       <img src="${item.image}" alt="${item.name}" onerror="this.style.background='#333'">
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-detail">${item.color} · Taglia ${item.size}</div>
+        <div class="cart-item-detail">${item.color} · ${item.size}</div>
       </div>
       <div class="cart-item-price">€${item.price}</div>
     </div>
@@ -200,6 +202,14 @@ document.getElementById('closeCart').addEventListener('click', closeCart);
 document.getElementById('cartOverlay').addEventListener('click', closeCart);
 
 // =====================
+// LINGUA
+// =====================
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.lang));
+});
+
+// =====================
 // AVVIO
 // =====================
 renderProducts('all', '');
+updatePageText();

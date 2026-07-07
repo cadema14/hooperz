@@ -21,9 +21,17 @@
         <a href="#prodotti">Prodotti</a>
         <a href="#chi-siamo">Chi siamo</a>
       </nav>
-      <button class="cart-btn" id="cartBtn">
-        🛍️ <span id="cartCount">0</span>
-      </button>
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="en">🇬🇧</button>
+          <button class="lang-btn" data-lang="it">🇮🇹</button>
+          <button class="lang-btn" data-lang="es">🇪🇸</button>
+          <button class="lang-btn" data-lang="fr">🇫🇷</button>
+        </div>
+        <button class="cart-btn" id="cartBtn">
+          🛍️ <span id="cartCount">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -58,7 +66,7 @@
   <section class="products-section">
     <div class="container">
       <div id="noResults" class="no-results" style="display:none">
-        😕 Nessuna maglia trovata per "<span id="searchTerm"></span>"
+        😕 <span id="noResultsText"></span> "<span id="searchTerm"></span>"
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -92,6 +100,7 @@
   </div>
 
   <script src="js/products.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

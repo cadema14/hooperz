@@ -564,4 +564,27 @@ body {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 1rem;
+} /* LINGUA */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+.lang-switcher {
+  display: flex;
+  gap: 4px;
+}
+.lang-btn {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #888;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.lang-btn:hover { color: #f0f0f0; border-color: #555; }
+.lang-btn.active { background: #E8521A; color: #fff; border-color: #E8521A; }
